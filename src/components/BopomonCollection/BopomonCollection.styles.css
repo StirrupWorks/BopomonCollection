@@ -1,0 +1,1000 @@
+.bopomon-collection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.bopomon-collection__header {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bopomon-collection__title {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bopomon-collection__header-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.bopomon-collection__stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bopomon-collection__stat-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+}
+
+.bopomon-collection__stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #667eea;
+  padding: 5px 15px;
+  background: #f0f4ff;
+  border-radius: 20px;
+}
+
+.bopomon-collection__stat-value--energy {
+  color: #f59e0b;
+  background: #fef3c7;
+}
+
+.bopomon-collection__nav {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bopomon-collection__nav-button {
+  flex: 1;
+  padding: 15px 25px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+}
+
+.bopomon-collection__nav-button:hover {
+  background: #f8f9fa;
+}
+
+.bopomon-collection__nav-button--active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.bopomon-collection__content {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  min-height: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.bopomon-collection__section-title {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 25px 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__codex-header {
+  margin-bottom: 25px;
+}
+
+.bopomon-collection__filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.bopomon-collection__filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bopomon-collection__filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+}
+
+.bopomon-collection__filter-select {
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  min-width: 150px;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__filter-select:hover {
+  border-color: #667eea;
+}
+
+.bopomon-collection__filter-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.bopomon-collection__clear-filters {
+  padding: 8px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-end;
+}
+
+.bopomon-collection__clear-filters:hover {
+  background: #5568d3;
+}
+
+.bopomon-collection__monster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.bopomon-collection__monster-card {
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bopomon-collection__monster-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.bopomon-collection__monster-card--owned .bopomon-collection__trading-card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.bopomon-collection__monster-card--locked {
+  opacity: 0.6;
+}
+
+/* Trading Card Styles - Matching BopomonCreator */
+.bopomon-collection__trading-card {
+  background: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #dc2626 100%);
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.bopomon-collection__trading-card-inner {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 4px solid #fde047;
+}
+
+.bopomon-collection__card-header {
+  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
+  padding: 16px;
+  border-bottom: 4px solid #fde047;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.bopomon-collection__card-pinyin {
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.bopomon-collection__card-bopomofo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fde047;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bopomon-collection__card-character {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  min-width: 60px;
+  text-align: right;
+}
+
+.bopomon-collection__card-image {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
+  border-top: 4px solid #fde047;
+  border-bottom: 4px solid #fde047;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bopomon-collection__card-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bopomon-collection__card-image-placeholder {
+  font-size: 4rem;
+  color: #fde047;
+  font-weight: bold;
+  text-shadow: 0 0 30px rgba(253, 224, 71, 0.6);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.bopomon-collection__card-body {
+  padding: 16px;
+}
+
+.bopomon-collection__card-stats {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid rgba(253, 224, 71, 0.5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.bopomon-collection__card-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.bopomon-collection__card-stat-label {
+  color: #fde047;
+  font-weight: 700;
+  font-size: 0.7rem;
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.bopomon-collection__card-stat-value {
+  color: white;
+  font-weight: 600;
+  margin-left: 4px;
+  font-size: 0.7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bopomon-collection__card-glyph {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(253, 224, 71, 0.2);
+  border: 2px solid #fde047;
+  border-radius: 50%;
+  color: #fde047;
+  font-weight: 800;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.bopomon-collection__card-footer {
+  background: linear-gradient(90deg, #374151 0%, #1f2937 100%);
+  padding: 8px;
+  text-align: center;
+  border-top: 2px solid #fde047;
+}
+
+.bopomon-collection__card-footer-text {
+  color: #fde68a;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Locked Card Styles */
+.bopomon-collection__locked-card {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  border: 3px solid #6b7280;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 300px;
+}
+
+.bopomon-collection__locked-icon {
+  font-size: 5rem;
+  color: #9ca3af;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bopomon-collection__locked-text {
+  font-size: 1.5rem;
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+.bopomon-collection__glyph-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.bopomon-collection__glyph-category {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid #667eea;
+}
+
+.bopomon-collection__category-title {
+  font-size: 1.3rem;
+  color: #667eea;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__glyph-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bopomon-collection__glyph-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bopomon-collection__glyph-symbol {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.bopomon-collection__glyph-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  background: #f0f4ff;
+  padding: 5px 12px;
+  border-radius: 15px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.bopomon-collection__breed-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.bopomon-collection__subsection-title {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__breed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.bopomon-collection__breed-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  transition: all 0.3s;
+}
+
+.bopomon-collection__breed-card--affordable {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.bopomon-collection__breed-card--affordable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
+}
+
+.bopomon-collection__breed-card--unaffordable {
+  opacity: 0.6;
+}
+
+.bopomon-collection__breed-name {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__breed-glyphs {
+  font-size: 2rem;
+  color: #667eea;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.bopomon-collection__breed-cost {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.bopomon-collection__breed-button {
+  width: 100%;
+  padding: 12px 20px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__breed-button:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.bopomon-collection__breed-button--disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.bopomon-collection__breed-button--disabled:hover {
+  background: #cbd5e1;
+  transform: none;
+}
+
+.bopomon-collection__empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.bopomon-collection__empty-text {
+  font-size: 1.3rem;
+  color: #666;
+  margin: 0 0 10px 0;
+}
+
+.bopomon-collection__empty-hint {
+  font-size: 1rem;
+  color: #999;
+  margin: 0;
+}
+
+.bopomon-collection__egg-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.bopomon-collection__egg-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bopomon-collection__egg-visual {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bopomon-collection__placeholder-egg {
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.bopomon-collection__egg-progress {
+  width: 80px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bopomon-collection__egg-progress-bar {
+  height: 100%;
+  background: #10b981;
+  transition: width 0.5s ease;
+}
+
+.bopomon-collection__egg-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bopomon-collection__egg-title {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__egg-timer {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bopomon-collection__instant-hatch-button {
+  padding: 10px 15px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__instant-hatch-button:hover {
+  background: #d97706;
+}
+
+.bopomon-collection__instant-hatch-button--disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bopomon-collection__instant-hatch-button--disabled:hover {
+  background: #cbd5e1;
+}
+
+.bopomon-collection__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.bopomon-collection__modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: #333;
+}
+
+.bopomon-collection__modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.bopomon-collection__modal-close:hover {
+  color: #333;
+}
+
+.bopomon-collection__monster-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.bopomon-collection__detail-image {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bopomon-collection__detail-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bopomon-collection__placeholder-monster-large {
+  font-size: 5rem;
+  color: #667eea;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.bopomon-collection__detail-title {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__play-sound-button {
+  padding: 12px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__play-sound-button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.bopomon-collection__detail-stats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bopomon-collection__stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.bopomon-collection__stat-row span {
+  color: #333;
+}
+
+.bopomon-collection__bopomofo-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.bopomon-collection__locked-message {
+  text-align: center;
+  color: #999;
+  font-size: 1.1rem;
+  padding: 20px;
+}
+
+.bopomon-collection__locked-message p {
+  color: #999;
+  margin: 10px 0;
+}
+
+.bopomon-collection__breed-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.bopomon-collection__confirm-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__confirm-glyphs {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.bopomon-collection__glyph-display {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.bopomon-collection__confirm-cost {
+  width: 100%;
+  padding: 20px;
+  background: #fef3c7;
+  border-radius: 10px;
+}
+
+.bopomon-collection__cost-title {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.bopomon-collection__cost-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bopomon-collection__cost-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.bopomon-collection__cost-item span {
+  color: #333;
+}
+
+.bopomon-collection__confirm-actions {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.bopomon-collection__cancel-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #e5e7eb;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__cancel-button:hover {
+  background: #d1d5db;
+}
+
+.bopomon-collection__confirm-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #10b981;
+  color: white;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__confirm-button:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* Hatching Modal Styles */
+.bopomon-collection__hatching-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+.bopomon-collection__hatching-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bopomon-collection__egg-visual-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.bopomon-collection__placeholder-egg-large {
+  font-size: 10rem;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+  animation: egg-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes egg-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.bopomon-collection__skip-button {
+  padding: 12px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bopomon-collection__skip-button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.bopomon-collection__hatched-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.bopomon-collection__hatched-title {
+  font-size: 2rem;
+  color: #10b981;
+  margin: 0;
+  font-weight: 800;
+  text-align: center;
+}
+
+.bopomon-collection__hatched-monster {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid #10b981;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+.bopomon-collection__hatched-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bopomon-collection__hatched-placeholder {
+  font-size: 6rem;
+  color: #667eea;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.bopomon-collection__hatched-name {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+.bopomon-collection__hatched-message {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
