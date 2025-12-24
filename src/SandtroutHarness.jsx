@@ -11,7 +11,7 @@ const VALID_CREDENTIALS = {
 
 const SESSION_KEY = 'sandtrout_session'
 
-export default function SandtroutHarness({ component: Component, initialData = null, title = 'Sandtrout App' }) {
+export default function SandtroutHarness({ component: Component, initialData = null, title = 'Prototype App' }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [username, setUsername] = useState('')
