@@ -16,6 +16,14 @@ export default function BopomonCollection({ __sandtrout_register_store }) {
     __sandtrout_register_store?.(storeInstance);
   }, [storeInstance, __sandtrout_register_store]);
 
+  // Start/stop hatch timer on mount/unmount to prevent memory leaks
+  useEffect(() => {
+    store.startHatchTimer();
+    return () => {
+      store.stopHatchTimer();
+    };
+  }, [store]);
+
   const getMonster = (monsterId) => {
     return store.monster_data.find(m => m.bpm_codex_id === monsterId);
   };
@@ -232,10 +240,10 @@ export default function BopomonCollection({ __sandtrout_register_store }) {
             <h2 className="bopomon-collection__section-title">Glyph Inventory</h2>
             <div className="bopomon-collection__glyph-categories">
               {[
-                { title: 'Initials', glyphs: ["ㄅ", "ㄍ", "ㄌ", "ㄕ","ㄑ"] },
-                { title: 'Medials', glyphs: ["ㄧ", "ㄨ", "ㄩ"] },
-                { title: 'Finals', glyphs: ["ㄟ", "ㄥ", "ㄤ","ㄣ"] },
-                { title: 'Tones', glyphs: ["ˉ", "ˊ","ˇ", "ˋ"] }
+                { title: 'Initials', glyphs: Object.keys(GlyphData.initials).filter(g => g) },
+                { title: 'Medials', glyphs: Object.keys(GlyphData.medials).filter(g => g) },
+                { title: 'Finals', glyphs: Object.keys(GlyphData.finals).filter(g => g) },
+                { title: 'Tones', glyphs: Object.keys(GlyphData.tones).filter(g => g) }
               ].map(category => (
                 <div key={category.title} className="bopomon-collection__glyph-category">
                   <h3 className="bopomon-collection__category-title">{category.title}</h3>

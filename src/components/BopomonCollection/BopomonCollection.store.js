@@ -8,62 +8,91 @@ const GLYPH_COSTS = {
 };
 
 const HATCH_TIME = 3000;
-const ENERGY_COST_INSTANT_HATCH = 50;
-const ENERGY_REGEN_RATE = 1000;
-const MAX_ENERGY = 200;
 
-export const createComponentStore = () => create((set, get) => {
-  const startHatchTimer = () => {
-    // Check every 100ms for smoother progress updates
-    setInterval(() => {
-      set((state) => {
-        if (state.hatching_egg && !state.hatching_egg.hatched) {
-          const now = Date.now();
-          if (state.hatching_egg.hatch_time <= now) {
-            const newCollection = new Set(state.collection);
-            newCollection.add(state.hatching_egg.monster_id);
-            return {
-              collection: newCollection,
-              hatching_egg: { ...state.hatching_egg, hatched: true }
-            };
-          }
-        }
-        return state;
-      });
-    }, 100);
-  };
+// Build default glyph inventory with 10 of each glyph
+const buildDefaultGlyphInventory = () => {
+  const inventory = {};
 
-  startHatchTimer();
+  // Add all initials (except empty string)
+  Object.keys(GlyphData.initials).forEach(glyph => {
+    if (glyph) inventory[glyph] = 10;
+  });
 
-  return {
+  // Add all medials (except empty string)
+  Object.keys(GlyphData.medials).forEach(glyph => {
+    if (glyph) inventory[glyph] = 10;
+  });
+
+  // Add all finals
+  Object.keys(GlyphData.finals).forEach(glyph => {
+    if (glyph && !inventory[glyph]) inventory[glyph] = 10; // Avoid duplicates with medials
+  });
+
+  // Add all tones
+  Object.keys(GlyphData.tones).forEach(glyph => {
+    if (glyph) inventory[glyph] = 10;
+  });
+
+  return inventory;
+};
+
+export const createComponentStore = () => {
+  // Store the interval reference outside the store state
+  let hatchTimerInterval = null;
+
+  return create((set, get) => ({
     current_view: 'collection',
     selected_monster: null,
     show_breed_confirm: null,
     hatching_egg: null,
     collection: new Set(),
-    glyph_inventory: {
-      "ㄅ": 5, "ㄍ": 5, "ㄌ": 5, "ㄕ": 5, "ㄑ":5,
-      "ㄧ": 10, "ㄨ": 10, "ㄩ": 10,
-      "ㄟ": 5, "ㄥ": 5, "ㄤ": 5, "ㄣ":5,
-      "ˉ": 10, "ˊ":10, "ˇ": 10, "ˋ": 5,
-    },
+    glyph_inventory: buildDefaultGlyphInventory(),
     monster_data: [],
-    
+
     // Filtering state
     filter_initial: null,
     filter_medial: null,
     filter_final: null,
     filter_tone: null,
 
+    // Hatch timer management
+    startHatchTimer: () => {
+      if (hatchTimerInterval) return; // Already running
+
+      hatchTimerInterval = setInterval(() => {
+        set((state) => {
+          if (state.hatching_egg && !state.hatching_egg.hatched) {
+            const now = Date.now();
+            if (state.hatching_egg.hatch_time <= now) {
+              const newCollection = new Set(state.collection);
+              newCollection.add(state.hatching_egg.monster_id);
+              return {
+                collection: newCollection,
+                hatching_egg: { ...state.hatching_egg, hatched: true }
+              };
+            }
+          }
+          return state;
+        });
+      }, 100);
+    },
+
+    stopHatchTimer: () => {
+      if (hatchTimerInterval) {
+        clearInterval(hatchTimerInterval);
+        hatchTimerInterval = null;
+      }
+    },
+
     setMonsterDatabase: (input) => {
       const monsters = input?.content || [];
       const parsedMonsters = monsters.map(row => {
         const converted = pinyinToBopomofo(row.pinyin);
-        
+
         // Derive element and texture from GlyphData
         const element = GlyphData.finals[converted.final]?.element || 'Unknown';
         const texture = GlyphData.tones[converted.tone]?.texture || 'Unknown';
-        
+
         return {
           bpm_codex_id: parseInt(row.bpm_codex_id),
           name: row.name,
@@ -83,7 +112,7 @@ export const createComponentStore = () => create((set, get) => {
           }
         };
       });
-      
+
       // Auto-add monsters with hatch_status == 1 to collection
       const newCollection = new Set(get().collection);
       parsedMonsters.forEach(monster => {
@@ -91,7 +120,7 @@ export const createComponentStore = () => create((set, get) => {
           newCollection.add(monster.bpm_codex_id);
         }
       });
-      
+
       set({ monster_data: parsedMonsters, collection: newCollection });
     },
 
@@ -99,7 +128,7 @@ export const createComponentStore = () => create((set, get) => {
     setSelectedMonster: (monster) => set({ selected_monster: monster }),
     setShowBreedConfirm: (monster) => set({ show_breed_confirm: monster }),
     setCollection: (collection) => set({ collection }),
-    
+
     setFilterInitial: (glyph) => set({ filter_initial: glyph }),
     setFilterMedial: (glyph) => set({ filter_medial: glyph }),
     setFilterFinal: (glyph) => set({ filter_final: glyph }),
@@ -110,28 +139,28 @@ export const createComponentStore = () => create((set, get) => {
       const state = get();
       const costs = GLYPH_COSTS[monster.rarity];
       const glyphs = monster.glyphs;
-      
+
       if (glyphs.initial && (state.glyph_inventory[glyphs.initial] || 0) < costs.initial) return false;
       if (glyphs.medial && (state.glyph_inventory[glyphs.medial] || 0) < costs.medial) return false;
       if (glyphs.final && (state.glyph_inventory[glyphs.final] || 0) < costs.final) return false;
       if (glyphs.tone && (state.glyph_inventory[glyphs.tone] || 0) < costs.tone) return false;
-      
+
       return true;
     },
 
     breedMonster: (monster) => {
       const state = get();
       if (!get().canAffordMonster(monster)) return;
-      
+
       const costs = GLYPH_COSTS[monster.rarity];
       const glyphs = monster.glyphs;
-      
+
       const newInventory = { ...state.glyph_inventory };
       if (glyphs.initial) newInventory[glyphs.initial] -= costs.initial;
       if (glyphs.medial) newInventory[glyphs.medial] -= costs.medial;
       if (glyphs.final) newInventory[glyphs.final] -= costs.final;
       if (glyphs.tone) newInventory[glyphs.tone] -= costs.tone;
-      
+
       const hatchingEgg = {
         monster_id: monster.bpm_codex_id,
         monster_name: monster.name,
@@ -139,8 +168,8 @@ export const createComponentStore = () => create((set, get) => {
         hatch_time: Date.now() + HATCH_TIME,
         hatched: false,
       };
-      
-      set({ 
+
+      set({
         glyph_inventory: newInventory,
         hatching_egg: hatchingEgg,
         show_breed_confirm: null
@@ -152,7 +181,14 @@ export const createComponentStore = () => create((set, get) => {
     },
 
     playSound: (pinyin) => {
-      console.log(`Playing sound: ${pinyin}.mp3`);
+      try {
+        const audio = new Audio(`/assets/sounds/pinyin/${pinyin}.mp3`);
+        audio.play().catch(err => {
+          console.warn(`Audio playback failed for ${pinyin}:`, err.message);
+        });
+      } catch (err) {
+        console.warn(`Could not create audio for ${pinyin}:`, err.message);
+      }
     }
-  };
-});
+  }));
+};

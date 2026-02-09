@@ -1,0 +1,630 @@
+.glyph-catcher {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.glyph-catcher__game-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 455px 280px;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Game Area - Portrait orientation like Tetris, 30% wider */
+.glyph-catcher__game-area {
+  background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  border-radius: 16px;
+  position: relative;
+  width: 455px;
+  height: 700px;
+  overflow: hidden;
+  border: 3px solid #fde047;
+  box-shadow: 0 0 30px rgba(253, 224, 71, 0.2);
+}
+
+/* Start Screen */
+.glyph-catcher__start-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.glyph-catcher__start-title {
+  font-size: 3rem;
+  color: #fde047;
+  margin: 0;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
+}
+
+.glyph-catcher__start-instructions {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.glyph-catcher__start-hint {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.glyph-catcher__start-button {
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.glyph-catcher__start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+.glyph-catcher__no-bopomon {
+  font-size: 1.5rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Settings */
+.glyph-catcher__settings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.glyph-catcher__setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.glyph-catcher__setting-label {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.glyph-catcher__mode-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.glyph-catcher__mode-button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.glyph-catcher__mode-button:hover {
+  border-color: #9ca3af;
+  color: white;
+}
+
+.glyph-catcher__mode-button--active {
+  background: rgba(253, 224, 71, 0.15);
+  border-color: #fde047;
+  color: #fde047;
+}
+
+.glyph-catcher__duration-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glyph-catcher__setting-input {
+  width: 70px;
+  padding: 6px 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+}
+
+.glyph-catcher__setting-input:focus {
+  border-color: #fde047;
+}
+
+.glyph-catcher__setting-unit {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* Falling Glyphs */
+.glyph-catcher__falling-glyph {
+  position: absolute;
+  font-size: 2.5rem;
+  font-weight: bold;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.glyph-catcher__falling-glyph--initial {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: 3px solid #fca5a5;
+}
+
+.glyph-catcher__falling-glyph--medial {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: 3px solid #93c5fd;
+}
+
+.glyph-catcher__falling-glyph--final {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: 3px solid #6ee7b7;
+}
+
+.glyph-catcher__falling-glyph--tone {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  border: 3px solid #fcd34d;
+}
+
+.glyph-catcher__falling-glyph--scored {
+  opacity: 0.4;
+  filter: grayscale(50%);
+}
+
+/* Avatar */
+.glyph-catcher__avatar {
+  position: absolute;
+  bottom: 5%;
+  transform: translateX(-50%);
+  transition: left 0.05s linear;
+}
+
+.glyph-catcher__avatar-body {
+  width: 80px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px 10px 5px 5px;
+  border: 3px solid #fde047;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+  position: relative;
+}
+
+.glyph-catcher__avatar-body::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 15px;
+  background: #fde047;
+  border-radius: 15px 15px 0 0;
+}
+
+/* End Screen */
+.glyph-catcher__end-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.glyph-catcher__end-title {
+  font-size: 3rem;
+  color: #fde047;
+  margin: 0;
+  font-weight: 800;
+}
+
+.glyph-catcher__final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.glyph-catcher__final-score-label {
+  font-size: 1.2rem;
+  color: #9ca3af;
+}
+
+.glyph-catcher__final-score-value {
+  font-size: 5rem;
+  font-weight: 800;
+}
+
+.glyph-catcher__final-score-value--positive {
+  color: #10b981;
+  text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+}
+
+.glyph-catcher__final-score-value--negative {
+  color: #ef4444;
+  text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+}
+
+.glyph-catcher__play-again-button {
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.glyph-catcher__play-again-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+.glyph-catcher__back-button {
+  padding: 10px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: transparent;
+  color: #9ca3af;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.glyph-catcher__back-button:hover {
+  border-color: #9ca3af;
+  color: white;
+}
+
+/* Side Panel */
+.glyph-catcher__side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Stats */
+.glyph-catcher__stats {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 2px solid rgba(253, 224, 71, 0.3);
+}
+
+.glyph-catcher__stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.glyph-catcher__stat-label {
+  font-size: 1rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.glyph-catcher__stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+}
+
+.glyph-catcher__stat-value--time {
+  color: #3b82f6;
+}
+
+.glyph-catcher__stat-value--warning {
+  color: #ef4444;
+  animation: pulse-warning 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.glyph-catcher__stat-value--positive {
+  color: #10b981;
+}
+
+.glyph-catcher__stat-value--negative {
+  color: #ef4444;
+}
+
+/* Lives */
+.glyph-catcher__lives {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.glyph-catcher__life {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.glyph-catcher__life--lost {
+  background: #374151;
+  box-shadow: none;
+}
+
+/* End screen elapsed time */
+.glyph-catcher__end-time {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Bopomon Card - Simplified version */
+.glyph-catcher__bopomon-card {
+  background: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #dc2626 100%);
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.glyph-catcher__card-header {
+  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.glyph-catcher__card-pinyin {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: white;
+}
+
+.glyph-catcher__card-bopomofo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fde047;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.glyph-catcher__card-character {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+}
+
+.glyph-catcher__card-image {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.glyph-catcher__card-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.glyph-catcher__card-image-placeholder {
+  font-size: 3rem;
+  color: #fde047;
+  font-weight: bold;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glyph-catcher__card-body {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.glyph-catcher__card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.glyph-catcher__card-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+}
+
+.glyph-catcher__card-glyph {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(253, 224, 71, 0.2);
+  border: 2px solid #fde047;
+  border-radius: 50%;
+  color: #fde047;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.glyph-catcher__card-stat-value {
+  color: white;
+  font-weight: 600;
+  font-size: 0.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Target Glyphs */
+.glyph-catcher__targets {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  border: 2px solid rgba(253, 224, 71, 0.3);
+}
+
+.glyph-catcher__targets-title {
+  font-size: 1rem;
+  color: #fde047;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.glyph-catcher__targets-list {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.glyph-catcher__target-glyph {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.glyph-catcher__target-glyph--initial {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border: 3px solid #fca5a5;
+}
+
+.glyph-catcher__target-glyph--medial {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: 3px solid #93c5fd;
+}
+
+.glyph-catcher__target-glyph--final {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: 3px solid #6ee7b7;
+}
+
+.glyph-catcher__target-glyph--tone {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: 3px solid #fcd34d;
+}
+
+/* Controls Hint */
+.glyph-catcher__controls-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.glyph-catcher__key {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #374151;
+  border: 2px solid #6b7280;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.glyph-catcher__controls-text {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .glyph-catcher__game-container {
+    grid-template-columns: 1fr;
+    max-width: 455px;
+  }
+
+  .glyph-catcher__game-area {
+    width: 100%;
+    height: 500px;
+  }
+
+  .glyph-catcher__side-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .glyph-catcher__stats {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .glyph-catcher__bopomon-card {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .glyph-catcher__targets {
+    flex: 1;
+    min-width: 150px;
+  }
+}
