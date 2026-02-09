@@ -9,8 +9,10 @@
 
 import { lazy } from 'react';
 
-const BopomonGlyphCatcher = lazy(() => import('./minigames/BopomonGlyphCatcher'));
 const BopomonCollection = lazy(() => import('./components/BopomonCollection'));
+const BopomonGlyphCatcher = lazy(() => import('./minigames/BopomonGlyphCatcher'));
+const BopomonCharacterFind = lazy(() => import('./minigames/BopomonCharacterFind'));
+
 
 import { initialData as collectionData } from './components/BopomonCollection/data.js';
 
@@ -27,5 +29,11 @@ export const minigames = [
     name: 'Glyph Catcher',
     description: 'Catch falling bopomofo glyphs that match your target Bopomon!',
     component: BopomonGlyphCatcher,
+  },
+  {
+    id: 'character-find',
+    name: 'Character Find',
+    description: 'Match Chinese characters to their pinyin or translation before time runs out!',
+    component: BopomonCharacterFind,
   },
 ];

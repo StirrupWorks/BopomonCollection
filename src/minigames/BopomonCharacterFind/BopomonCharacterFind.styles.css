@@ -1,0 +1,487 @@
+.bopomon-character-find {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.bopomon-character-find__game-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 455px 280px;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* ── Game Area ── */
+
+.bopomon-character-find__game-area {
+  background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  border-radius: 16px;
+  position: relative;
+  width: 455px;
+  height: 700px;
+  overflow: hidden;
+  border: 3px solid #fde047;
+  box-shadow: 0 0 30px rgba(253, 224, 71, 0.2);
+}
+
+/* ── Bubbles (stationary) ── */
+
+.bopomon-character-find__bubble {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(147, 130, 220, 0.35), rgba(99, 102, 241, 0.15));
+  border: 2px solid rgba(165, 148, 249, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  font-family: inherit;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+  transition: box-shadow 0.3s;
+}
+
+.bopomon-character-find__bubble:hover {
+  background: radial-gradient(circle at 30% 30%, rgba(147, 130, 220, 0.55), rgba(99, 102, 241, 0.3));
+  border-color: rgba(165, 148, 249, 0.6);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.bopomon-character-find__bubble-char {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* Timer ring SVG overlay */
+
+.bopomon-character-find__timer-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+}
+
+/* Danger pulse when > 75% expired */
+
+.bopomon-character-find__bubble--danger {
+  animation: bopomon-character-find-danger-pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes bopomon-character-find-danger-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); }
+  50%      { box-shadow: 0 0 24px rgba(239, 68, 68, 0.6); }
+}
+
+/* Pop (correct click) */
+
+.bopomon-character-find__bubble--pop {
+  animation: bopomon-character-find-pop 0.35s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes bopomon-character-find-pop {
+  0%  { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  40% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.7;
+        border-color: rgba(16, 185, 129, 0.8);
+        background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.5), rgba(5, 150, 105, 0.3)); }
+  100%{ transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+/* Shake (wrong click) */
+
+.bopomon-character-find__bubble--shake {
+  animation: bopomon-character-find-shake 0.5s ease-out;
+  background: radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.4), rgba(220, 38, 38, 0.2));
+  border-color: rgba(239, 68, 68, 0.6);
+  pointer-events: none;
+}
+
+@keyframes bopomon-character-find-shake {
+  0%, 100% { transform: translate(-50%, -50%); }
+  15%      { transform: translate(calc(-50% + 8px), -50%); }
+  30%      { transform: translate(calc(-50% - 8px), -50%); }
+  45%      { transform: translate(calc(-50% + 5px), -50%); }
+  60%      { transform: translate(calc(-50% - 5px), -50%); }
+  75%      { transform: translate(calc(-50% + 2px), -50%); }
+}
+
+/* Expire (timed out) */
+
+.bopomon-character-find__bubble--expire {
+  animation: bopomon-character-find-expire 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes bopomon-character-find-expire {
+  0%  { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5;
+        border-color: rgba(239, 68, 68, 0.8);
+        background: radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.4), rgba(220, 38, 38, 0.2)); }
+  100%{ transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+
+/* ── Feedback floating text ── */
+
+.bopomon-character-find__feedback {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: 800;
+  pointer-events: none;
+  animation: bopomon-character-find-feedback 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+.bopomon-character-find__feedback--correct {
+  color: #10b981;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.bopomon-character-find__feedback--wrong {
+  color: #ef4444;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes bopomon-character-find-feedback {
+  0%   { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(-50%, calc(-50% - 40px)); }
+}
+
+/* ── Start Screen ── */
+
+.bopomon-character-find__start-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.bopomon-character-find__start-title {
+  font-size: 3rem;
+  color: #fde047;
+  margin: 0;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
+}
+
+.bopomon-character-find__start-instructions {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.bopomon-character-find__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.bopomon-character-find__rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #9ca3af;
+}
+
+.bopomon-character-find__rule-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.2);
+  border: 2px solid #10b981;
+  color: #10b981;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bopomon-character-find__rule-icon--bad {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.bopomon-character-find__rule-icon--streak {
+  background: rgba(253, 224, 71, 0.2);
+  border-color: #fde047;
+  color: #fde047;
+}
+
+.bopomon-character-find__rule-icon--timer {
+  background: rgba(234, 179, 8, 0.2);
+  border-color: #eab308;
+  border-style: dashed;
+  color: #eab308;
+}
+
+.bopomon-character-find__start-button,
+.bopomon-character-find__play-again-button {
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.bopomon-character-find__start-button:hover,
+.bopomon-character-find__play-again-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+/* ── End Screen ── */
+
+.bopomon-character-find__end-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.bopomon-character-find__end-title {
+  font-size: 3rem;
+  color: #fde047;
+  margin: 0;
+  font-weight: 800;
+}
+
+.bopomon-character-find__final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bopomon-character-find__final-score-label {
+  font-size: 1.2rem;
+  color: #9ca3af;
+}
+
+.bopomon-character-find__final-score-value {
+  font-size: 5rem;
+  font-weight: 800;
+  color: #10b981;
+  text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+}
+
+/* ── Side Panel ── */
+
+.bopomon-character-find__side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bopomon-character-find__panel-placeholder {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.95rem;
+  border: 2px dashed #374151;
+}
+
+/* Stats */
+
+.bopomon-character-find__stats {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 2px solid rgba(253, 224, 71, 0.3);
+}
+
+.bopomon-character-find__stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bopomon-character-find__stat-label {
+  font-size: 1rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.bopomon-character-find__stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+}
+
+.bopomon-character-find__stat-value--score {
+  font-size: 2rem;
+  color: #10b981;
+}
+
+/* Lives */
+
+.bopomon-character-find__lives {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.bopomon-character-find__life {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* Streak pips */
+
+.bopomon-character-find__streak-pips {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.bopomon-character-find__streak-pip {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #374151;
+  transition: all 0.2s;
+}
+
+.bopomon-character-find__streak-pip--filled {
+  background: #fde047;
+  box-shadow: 0 0 8px rgba(253, 224, 71, 0.5);
+}
+
+/* Targets */
+
+.bopomon-character-find__targets {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  border: 2px solid rgba(253, 224, 71, 0.3);
+}
+
+.bopomon-character-find__targets-title {
+  font-size: 1rem;
+  color: #fde047;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bopomon-character-find__targets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bopomon-character-find__target-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(253, 224, 71, 0.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: bopomon-character-find-card-in 0.3s ease-out;
+}
+
+@keyframes bopomon-character-find-card-in {
+  0%   { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.bopomon-character-find__target-hint {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+}
+
+.bopomon-character-find__target-type {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Hint */
+
+.bopomon-character-find__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 800px) {
+  .bopomon-character-find__game-container {
+    grid-template-columns: 1fr;
+    max-width: 455px;
+  }
+
+  .bopomon-character-find__game-area {
+    width: 100%;
+    height: 500px;
+  }
+
+  .bopomon-character-find__side-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .bopomon-character-find__stats {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .bopomon-character-find__targets {
+    flex: 1;
+    min-width: 150px;
+  }
+}
