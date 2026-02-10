@@ -12,6 +12,7 @@ import { lazy } from 'react';
 const BopomonCollection = lazy(() => import('./components/BopomonCollection'));
 const BopomonGlyphCatcher = lazy(() => import('./minigames/BopomonGlyphCatcher'));
 const BopomonCharacterFind = lazy(() => import('./minigames/BopomonCharacterFind'));
+const ChineseStrokePractice = lazy(() => import('./minigames/ChineseStrokePractice'));
 
 
 import { initialData as collectionData } from './components/BopomonCollection/data.js';
@@ -35,5 +36,11 @@ export const minigames = [
     name: 'Character Find',
     description: 'Match Chinese characters to their pinyin or translation before time runs out!',
     component: BopomonCharacterFind,
+  },
+  {
+    id: 'stroke-practice',
+    name: 'Chinese Stroke Practice',
+    description: 'Practice the 8 basic strokes!',
+    component: ChineseStrokePractice,
   },
 ];
