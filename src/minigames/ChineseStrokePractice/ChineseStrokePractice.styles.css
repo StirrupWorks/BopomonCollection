@@ -1,0 +1,386 @@
+.chinese-stroke-practice {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fafafa;
+  touch-action: none;
+  user-select: none;
+}
+
+.chinese-stroke-practice__header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.chinese-stroke-practice__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.75rem 0;
+}
+
+.chinese-stroke-practice__stroke-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: center;
+}
+
+.chinese-stroke-practice__stroke-tab {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: #e8e8e8;
+  color: #666;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.chinese-stroke-practice__stroke-tab:hover {
+  background: #ddd;
+}
+
+.chinese-stroke-practice__stroke-tab--active {
+  background: #c62828;
+  color: white;
+}
+
+.chinese-stroke-practice__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chinese-stroke-practice__info-panel {
+  text-align: center;
+  width: 100%;
+}
+
+.chinese-stroke-practice__stroke-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.chinese-stroke-practice__character {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.2;
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.chinese-stroke-practice__pinyin {
+  font-size: 1.25rem;
+  color: #888;
+  font-style: italic;
+}
+
+.chinese-stroke-practice__meaning {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.chinese-stroke-practice__instruction {
+  font-size: 0.9rem;
+  color: #999;
+  margin: 0;
+}
+
+/* Grade display above canvas - fixed height box */
+.chinese-stroke-practice__grade {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 44px;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.chinese-stroke-practice__grade--empty {
+  /* Empty state - invisible but takes space */
+}
+
+.chinese-stroke-practice__grade--pass {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+}
+
+.chinese-stroke-practice__grade--fail {
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+}
+
+.chinese-stroke-practice__grade-placeholder {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.chinese-stroke-practice__score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.chinese-stroke-practice__score--excellent {
+  color: #1b5e20;
+}
+
+.chinese-stroke-practice__score--good {
+  color: #2e7d32;
+}
+
+.chinese-stroke-practice__score--pass {
+  color: #f57f17;
+}
+
+.chinese-stroke-practice__score--fail {
+  color: #c62828;
+}
+
+.chinese-stroke-practice__feedback {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.chinese-stroke-practice__extra-issues {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* Canvas */
+.chinese-stroke-practice__canvas-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem;
+}
+
+.chinese-stroke-practice__canvas {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ddd;
+  border-radius: 0.75rem;
+  cursor: crosshair;
+  touch-action: none;
+  background: #fff;
+}
+
+.chinese-stroke-practice__canvas-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #888;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Navigation */
+.chinese-stroke-practice__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.chinese-stroke-practice__nav-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chinese-stroke-practice__nav-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.chinese-stroke-practice__nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.chinese-stroke-practice__progress {
+  font-size: 0.9rem;
+  color: #888;
+  min-width: 3rem;
+  text-align: center;
+}
+
+/* Footer */
+.chinese-stroke-practice__footer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  margin-top: 1rem;
+}
+
+.chinese-stroke-practice__stats {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* iPad and tablet optimizations */
+@media (min-width: 768px) {
+  .chinese-stroke-practice {
+    padding: 2rem;
+    max-width: 600px;
+  }
+
+  .chinese-stroke-practice__title {
+    font-size: 1.5rem;
+  }
+
+  .chinese-stroke-practice__stroke-tab {
+    font-size: 1.25rem;
+    padding: 0.625rem 1rem;
+  }
+
+  .chinese-stroke-practice__character {
+    font-size: 4rem;
+  }
+
+  .chinese-stroke-practice__canvas-container {
+    max-width: 400px;
+  }
+
+  .chinese-stroke-practice__nav {
+    max-width: 400px;
+  }
+
+  .chinese-stroke-practice__nav-btn {
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .chinese-stroke-practice__score {
+    font-size: 1.75rem;
+  }
+
+  .chinese-stroke-practice__grade {
+    height: 52px;
+    max-width: 400px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .chinese-stroke-practice {
+    background: #1a1a1a;
+  }
+
+  .chinese-stroke-practice__title {
+    color: #f0f0f0;
+  }
+
+  .chinese-stroke-practice__stroke-tab {
+    background: #333;
+    color: #aaa;
+  }
+
+  .chinese-stroke-practice__stroke-tab:hover {
+    background: #444;
+  }
+
+  .chinese-stroke-practice__stroke-tab--active {
+    background: #c62828;
+    color: white;
+  }
+
+  .chinese-stroke-practice__character {
+    color: #f0f0f0;
+  }
+
+  .chinese-stroke-practice__pinyin {
+    color: #888;
+  }
+
+  .chinese-stroke-practice__meaning {
+    color: #aaa;
+  }
+
+  .chinese-stroke-practice__instruction {
+    color: #777;
+  }
+
+  .chinese-stroke-practice__grade--pass {
+    background: #1b3d1f;
+    border-color: #2e5a32;
+  }
+
+  .chinese-stroke-practice__grade--fail {
+    background: #3d1b1b;
+    border-color: #5a2e2e;
+  }
+
+  .chinese-stroke-practice__feedback {
+    color: #ddd;
+  }
+
+  .chinese-stroke-practice__grade-placeholder {
+    color: #666;
+  }
+
+  .chinese-stroke-practice__canvas-container {
+    background: #2a2a2a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .chinese-stroke-practice__canvas {
+    border-color: #444;
+    background: #fafafa;
+  }
+
+  .chinese-stroke-practice__canvas-hint {
+    background: rgba(40, 40, 40, 0.9);
+    color: #aaa;
+  }
+
+  .chinese-stroke-practice__nav-btn {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ddd;
+  }
+
+  .chinese-stroke-practice__nav-btn:hover:not(:disabled) {
+    background: #333;
+  }
+
+  .chinese-stroke-practice__footer {
+    border-top-color: #333;
+  }
+
+  .chinese-stroke-practice__stats,
+  .chinese-stroke-practice__progress {
+    color: #888;
+  }
+}
