@@ -6,12 +6,11 @@
 }
 
 .bopomon-character-find__game-container {
-  max-width: 1100px;
+  max-width: 500px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 455px 280px;
-  gap: 20px;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* ── Game Area ── */
@@ -20,8 +19,8 @@
   background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   border-radius: 16px;
   position: relative;
-  width: 455px;
-  height: 700px;
+  width: 100%;
+  height: 400px;
   overflow: hidden;
   border: 3px solid #fde047;
   box-shadow: 0 0 30px rgba(253, 224, 71, 0.2);
@@ -31,8 +30,8 @@
 
 .bopomon-character-find__bubble {
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, rgba(147, 130, 220, 0.35), rgba(99, 102, 241, 0.15));
   border: 2px solid rgba(165, 148, 249, 0.3);
@@ -57,7 +56,7 @@
 }
 
 .bopomon-character-find__bubble-char {
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -70,8 +69,8 @@
   position: absolute;
   top: -4px;
   left: -4px;
-  width: 72px;
-  height: 72px;
+  width: 88px;
+  height: 88px;
   pointer-events: none;
 }
 
@@ -300,6 +299,143 @@
   text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
 }
 
+/* ── Win Screen ── */
+
+.bopomon-character-find__game-area--won {
+  overflow: hidden;
+}
+
+.bopomon-character-find__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bopomon-character-find__confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  border-radius: 2px;
+  animation: bopomon-character-find-confetti-fall 3s ease-in-out infinite;
+}
+
+@keyframes bopomon-character-find-confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(450px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.bopomon-character-find__win-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
+  border: 3px solid #10b981;
+  border-radius: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(16, 185, 129, 0.4);
+  animation: bopomon-character-find-modal-pop 0.4s ease-out;
+  z-index: 10;
+}
+
+@keyframes bopomon-character-find-modal-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.bopomon-character-find__win-title {
+  font-size: 2.5rem;
+  color: #10b981;
+  margin: 0 0 15px 0;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.bopomon-character-find__win-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bopomon-character-find__win-score-value {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #fde047;
+  text-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
+}
+
+.bopomon-character-find__win-score-label {
+  font-size: 1.2rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.bopomon-character-find__win-message {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  margin: 0 0 25px 0;
+}
+
+.bopomon-character-find__win-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.bopomon-character-find__continue-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.bopomon-character-find__continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.bopomon-character-find__restart-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: transparent;
+  color: #9ca3af;
+  border: 2px solid #4b5563;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.bopomon-character-find__restart-button:hover {
+  border-color: #9ca3af;
+  color: white;
+}
+
 /* ── Side Panel ── */
 
 .bopomon-character-find__side-panel {
@@ -399,6 +535,20 @@
   border: 2px solid rgba(253, 224, 71, 0.3);
 }
 
+.bopomon-character-find__targets--top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+}
+
+.bopomon-character-find__targets-label {
+  font-size: 1.1rem;
+  color: #fde047;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
 .bopomon-character-find__targets-title {
   font-size: 1rem;
   color: #fde047;
@@ -413,6 +563,12 @@
   gap: 10px;
 }
 
+.bopomon-character-find__targets--top .bopomon-character-find__targets-list {
+  flex-direction: row;
+  flex: 1;
+  gap: 12px;
+}
+
 .bopomon-character-find__target-card {
   background: rgba(255, 255, 255, 0.08);
   border: 2px solid rgba(253, 224, 71, 0.25);
@@ -422,6 +578,13 @@
   justify-content: space-between;
   align-items: center;
   animation: bopomon-character-find-card-in 0.3s ease-out;
+}
+
+.bopomon-character-find__targets--top .bopomon-character-find__target-card {
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 16px;
 }
 
 @keyframes bopomon-character-find-card-in {
@@ -459,15 +622,23 @@
 
 /* ── Responsive ── */
 
-@media (max-width: 800px) {
-  .bopomon-character-find__game-container {
-    grid-template-columns: 1fr;
-    max-width: 455px;
+@media (max-width: 520px) {
+  .bopomon-character-find {
+    padding: 10px;
   }
 
   .bopomon-character-find__game-area {
+    height: 350px;
+  }
+
+  .bopomon-character-find__targets--top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bopomon-character-find__targets--top .bopomon-character-find__targets-list {
     width: 100%;
-    height: 500px;
+    justify-content: center;
   }
 
   .bopomon-character-find__side-panel {
@@ -476,11 +647,6 @@
   }
 
   .bopomon-character-find__stats {
-    flex: 1;
-    min-width: 150px;
-  }
-
-  .bopomon-character-find__targets {
     flex: 1;
     min-width: 150px;
   }

@@ -3,13 +3,14 @@ import { createComponentStore } from './BopomonCharacterFind.store.js';
 import './BopomonCharacterFind.styles.css';
 
 // ── Options (adjust these) ──
-const BUBBLE_COUNT = 9;       // number of characters on the field (multiples of 3)
+const BUBBLE_COUNT = 6;       // number of characters on the field (multiples of 3)
 const TARGET_COUNT = 1;       // number of targets to find at once
 const INITIAL_LIVES = 3;
 const CORRECT_FOR_LIFE = 5;
-const BUBBLE_DURATION = 30000; // ms per bubble
+const BUBBLE_DURATION = 40000; // ms per bubble
+const WIN_SCORE = 25;         // score to win the round
 
-const TIMER_RADIUS = 33;
+const TIMER_RADIUS = 40;
 const TIMER_CIRCUMFERENCE = 2 * Math.PI * TIMER_RADIUS;
 
 // Grid: 3 columns, rows derived from BUBBLE_COUNT
@@ -17,12 +18,15 @@ const SLOT_POSITIONS = (() => {
   const cols = 3;
   const rows = BUBBLE_COUNT / cols;
   const positions = [];
-  const yStart = rows > 1 ? 13 : 50;
-  const ySpacing = rows > 1 ? 74 / (rows - 1) : 0;
+  // Distribute bubbles between 25% and 75% of the height
+  const yMin = 25;
+  const yMax = 75;
+  const yStart = rows > 1 ? yMin : 50;
+  const ySpacing = rows > 1 ? (yMax - yMin) / (rows - 1) : 0;
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       positions.push({
-        x: 20 + col * 30,
+        x: 25 + col * 25,
         y: yStart + row * ySpacing,
       });
     }
@@ -84,7 +88,8 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
       .map(b => b.character);
   }, []);
 
-  const createTarget = useCallback((existingTargets) => {
+  // Create target from word bank (used for initial setup)
+  const createTargetFromWordBank = useCallback((existingTargets) => {
     const exclude = existingTargets.map(t => t.character);
     const word = getRandomWord(exclude);
     return {
@@ -95,6 +100,28 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
       showAs: Math.random() > 0.5 ? 'pinyin' : 'translation',
     };
   }, [getRandomWord]);
+
+  // Create target from bubbles currently on the field
+  const createTargetFromField = useCallback((existingTargets, bubbles) => {
+    const excludeChars = existingTargets.map(t => t.character);
+    const availableBubbles = bubbles.filter(
+      b => b.state === 'normal' && !excludeChars.includes(b.character)
+    );
+
+    if (availableBubbles.length === 0) {
+      // Fallback to word bank if no available bubbles
+      return createTargetFromWordBank(existingTargets);
+    }
+
+    const bubble = pickRandom(availableBubbles);
+    return {
+      id: ++nextId,
+      character: bubble.character,
+      pinyin: bubble.pinyin,
+      translation: bubble.translation,
+      showAs: Math.random() > 0.5 ? 'pinyin' : 'translation',
+    };
+  }, [createTargetFromWordBank]);
 
   const createBubbleForSlot = useCallback((slotIndex, timestamp, targetsList, fieldChars) => {
     const exclude = fieldChars || [];
@@ -193,7 +220,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
           store.recordExpired(bubble.character, match);
           loseLife();
           targetsRef.current = targetsRef.current.map(t =>
-            t.id === match.id ? createTarget(targetsRef.current) : t
+            t.id === match.id ? createTargetFromField(targetsRef.current, bubblesRef.current) : t
           );
           targetsChanged = true;
         }
@@ -210,7 +237,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     if (gameStateRef.current === 'playing') {
       animRef.current = requestAnimationFrame(gameLoop);
     }
-  }, [ensureTargetCoverage, loseLife, createTarget, createBubbleForSlot, getFieldCharacters, store]);
+  }, [ensureTargetCoverage, loseLife, createTargetFromField, createBubbleForSlot, getFieldCharacters, store]);
 
   // Handle clicking a bubble
   const handleBubbleClick = useCallback((bubbleId) => {
@@ -233,6 +260,15 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
       setCorrectCount(correctCountRef.current);
       setFeedback({ type: 'correct', x: pos.x, y: pos.y, id: ++nextId });
 
+      // Check for win (only trigger exactly at WIN_SCORE)
+      if (scoreRef.current === WIN_SCORE) {
+        gameStateRef.current = 'won';
+        setGameState('won');
+        bubblesRef.current[idx] = { ...bubble, state: 'popping', animStartTime: now };
+        setTimeout(() => setFeedback(null), 800);
+        return;
+      }
+
       // Every 5 correct → gain a life
       if (correctCountRef.current >= CORRECT_FOR_LIFE) {
         livesRef.current += 1;
@@ -241,9 +277,9 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
         setCorrectCount(0);
       }
 
-      // Replace matched target (always keep TARGET_COUNT)
+      // Replace matched target (always keep TARGET_COUNT) - pick from remaining bubbles
       const newTargets = targetsRef.current.map(t =>
-        t.id === matchingTarget.id ? createTarget(targetsRef.current) : t
+        t.id === matchingTarget.id ? createTargetFromField(targetsRef.current, bubblesRef.current) : t
       );
       targetsRef.current = newTargets;
       setTargets([...newTargets]);
@@ -260,7 +296,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     }
 
     setTimeout(() => setFeedback(null), 800);
-  }, [loseLife, createTarget, store]);
+  }, [loseLife, createTargetFromField, store]);
 
   // Start / restart
   const startGame = useCallback(() => {
@@ -272,7 +308,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
 
     const initialTargets = [];
     for (let i = 0; i < TARGET_COUNT; i++) {
-      initialTargets.push(createTarget(initialTargets));
+      initialTargets.push(createTargetFromWordBank(initialTargets));
     }
 
     // Build bubbles with unique characters
@@ -315,7 +351,53 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     setGameState('playing');
     gameStateRef.current = 'playing';
     animRef.current = requestAnimationFrame(gameLoop);
-  }, [gameLoop, createTarget, createBubbleForSlot, store]);
+  }, [gameLoop, createTargetFromWordBank, createBubbleForSlot, store]);
+
+  // Continue after winning
+  const continueGame = useCallback(() => {
+    const now = performance.now();
+
+    const initialTargets = [];
+    for (let i = 0; i < TARGET_COUNT; i++) {
+      initialTargets.push(createTargetFromWordBank(initialTargets));
+    }
+
+    // Build bubbles with unique characters
+    const initialBubbles = [];
+    const usedChars = [];
+    for (let i = 0; i < BUBBLE_COUNT; i++) {
+      const bubble = createBubbleForSlot(i, now, initialTargets, usedChars);
+      bubble.spawnTime = now - Math.random() * 10000;
+      usedChars.push(bubble.character);
+      initialBubbles.push(bubble);
+    }
+
+    // Guarantee at least one bubble per target
+    initialTargets.forEach(target => {
+      const has = initialBubbles.some(b => b.character === target.character);
+      if (!has) {
+        const idx = initialBubbles.findIndex(
+          b => !initialTargets.some(t => t.character === b.character)
+        );
+        if (idx >= 0) {
+          initialBubbles[idx].character = target.character;
+          initialBubbles[idx].pinyin = target.pinyin;
+          initialBubbles[idx].translation = target.translation;
+        }
+      }
+    });
+
+    bubblesRef.current = initialBubbles;
+    targetsRef.current = initialTargets;
+    // Keep score, lives, correctCount from before
+
+    setBubbles(initialBubbles);
+    setTargets(initialTargets);
+    setFeedback(null);
+    setGameState('playing');
+    gameStateRef.current = 'playing';
+    animRef.current = requestAnimationFrame(gameLoop);
+  }, [gameLoop, createTargetFromWordBank, createBubbleForSlot]);
 
   useEffect(() => {
     if (gameState !== 'playing' && animRef.current) {
@@ -393,10 +475,68 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     );
   }
 
+  // ─── Win screen ───
+  if (gameState === 'won') {
+    return (
+      <div className="bopomon-character-find">
+        <div className="bopomon-character-find__game-container">
+          <div className="bopomon-character-find__game-area bopomon-character-find__game-area--won">
+            <div className="bopomon-character-find__confetti">
+              {Array.from({ length: 50 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="bopomon-character-find__confetti-piece"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 2}s`,
+                    backgroundColor: ['#fde047', '#10b981', '#ec4899', '#3b82f6', '#f97316'][i % 5]
+                  }}
+                />
+              ))}
+            </div>
+            <div className="bopomon-character-find__win-modal">
+              <h2 className="bopomon-character-find__win-title">You Win!</h2>
+              <div className="bopomon-character-find__win-score">
+                <span className="bopomon-character-find__win-score-value">{score}</span>
+                <span className="bopomon-character-find__win-score-label">points</span>
+              </div>
+              <p className="bopomon-character-find__win-message">Amazing work!</p>
+              <div className="bopomon-character-find__win-buttons">
+                <button className="bopomon-character-find__continue-button" onClick={continueGame}>
+                  Keep Going
+                </button>
+                <button className="bopomon-character-find__restart-button" onClick={startGame}>
+                  Start Over
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="bopomon-character-find__side-panel" />
+        </div>
+      </div>
+    );
+  }
+
   // ─── Playing ───
   return (
     <div className="bopomon-character-find">
       <div className="bopomon-character-find__game-container">
+        <div className="bopomon-character-find__targets bopomon-character-find__targets--top">
+          <span className="bopomon-character-find__targets-label">Find:</span>
+          <div className="bopomon-character-find__targets-list">
+            {targets.map(target => (
+              <div key={target.id} className="bopomon-character-find__target-card">
+                <span className="bopomon-character-find__target-hint">
+                  {target.showAs === 'pinyin' ? target.pinyin : target.translation}
+                </span>
+                <span className="bopomon-character-find__target-type">
+                  {target.showAs}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="bopomon-character-find__game-area">
           {bubbles.map(bubble => {
             const pos = SLOT_POSITIONS[bubble.slotIndex];
@@ -418,10 +558,10 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
                 onClick={() => handleBubbleClick(bubble.id)}
               >
-                <svg className="bopomon-character-find__timer-ring" viewBox="0 0 72 72">
+                <svg className="bopomon-character-find__timer-ring" viewBox="0 0 88 88">
                   <circle
-                    cx="36"
-                    cy="36"
+                    cx="44"
+                    cy="44"
                     r={TIMER_RADIUS}
                     fill="none"
                     stroke={color}
@@ -429,7 +569,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
                     strokeDasharray={TIMER_CIRCUMFERENCE}
                     strokeDashoffset={dashOffset}
                     strokeLinecap="round"
-                    transform="rotate(-90 36 36)"
+                    transform="rotate(-90 44 44)"
                   />
                 </svg>
                 <span className="bopomon-character-find__bubble-char">{bubble.character}</span>
@@ -474,22 +614,6 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
                   />
                 ))}
               </div>
-            </div>
-          </div>
-
-          <div className="bopomon-character-find__targets">
-            <h3 className="bopomon-character-find__targets-title">Find These</h3>
-            <div className="bopomon-character-find__targets-list">
-              {targets.map(target => (
-                <div key={target.id} className="bopomon-character-find__target-card">
-                  <span className="bopomon-character-find__target-hint">
-                    {target.showAs === 'pinyin' ? target.pinyin : target.translation}
-                  </span>
-                  <span className="bopomon-character-find__target-type">
-                    {target.showAs}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
 
