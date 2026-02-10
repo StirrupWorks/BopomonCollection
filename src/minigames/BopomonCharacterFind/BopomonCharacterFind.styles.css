@@ -20,10 +20,14 @@
   border-radius: 16px;
   position: relative;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   overflow: hidden;
   border: 3px solid #fde047;
   box-shadow: 0 0 30px rgba(253, 224, 71, 0.2);
+}
+
+.bopomon-character-find__game-area--playing {
+  height: 400px;
 }
 
 /* ── Bubbles (stationary) ── */
@@ -163,15 +167,14 @@
 /* ── Start Screen ── */
 
 .bopomon-character-find__start-screen {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 40px;
+  padding: 40px 20px;
   text-align: center;
+  min-height: 400px;
 }
 
 .bopomon-character-find__start-title {

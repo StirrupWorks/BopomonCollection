@@ -537,7 +537,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
           </div>
         </div>
 
-        <div className="bopomon-character-find__game-area">
+        <div className="bopomon-character-find__game-area bopomon-character-find__game-area--playing">
           {bubbles.map(bubble => {
             const pos = SLOT_POSITIONS[bubble.slotIndex];
             const progress = bubble.progress || 0;
