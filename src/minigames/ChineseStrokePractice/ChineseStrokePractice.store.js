@@ -380,7 +380,7 @@ export const createComponentStore = () => create(
     reference_path: null,    // Ideal stroke overlay
     completed_count: 0,
     practice_start_time: null,
-    show_guides: false,      // Show stroke guide lines on enemies (easy mode)
+    show_guides: true,       // Show stroke guide lines on enemies (easy mode)
 
     // Getters
     getStrokes: () => BASIC_STROKES,
