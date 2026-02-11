@@ -2,6 +2,12 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { createComponentStore } from './ChineseStrokePractice.store.js';
 import './ChineseStrokePractice.styles.css';
 
+// Enemy SVG paths (served from public/assets/enemies/)
+const getEnemySvgPath = (file, showGuides) => {
+  const suffix = showGuides ? '' : '-noguide';
+  return `/assets/enemies/${file}${suffix}.svg`;
+};
+
 export default function ChineseStrokePractice({ __sandtrout_register_store }) {
   const [{ useStore, storeInstance }] = useState(() => {
     const storeInstance = createComponentStore();
@@ -118,8 +124,7 @@ export default function ChineseStrokePractice({ __sandtrout_register_store }) {
 
   const getScoreClass = (score) => {
     if (score >= 90) return 'chinese-stroke-practice__score--excellent';
-    if (score >= 75) return 'chinese-stroke-practice__score--good';
-    if (score >= 60) return 'chinese-stroke-practice__score--pass';
+    if (score >= 80) return 'chinese-stroke-practice__score--good';
     return 'chinese-stroke-practice__score--fail';
   };
 
@@ -144,14 +149,16 @@ export default function ChineseStrokePractice({ __sandtrout_register_store }) {
 
       <div className="chinese-stroke-practice__main">
         {currentStroke && (
-          <div className="chinese-stroke-practice__info-panel">
-            <div className="chinese-stroke-practice__stroke-name">
-              <span className="chinese-stroke-practice__character">{currentStroke.name}</span>
-              <span className="chinese-stroke-practice__pinyin">{currentStroke.pinyin}</span>
+          <>
+            <div className="chinese-stroke-practice__info-panel">
+              <div className="chinese-stroke-practice__stroke-name">
+                <span className="chinese-stroke-practice__character">{currentStroke.name}</span>
+                <span className="chinese-stroke-practice__pinyin">{currentStroke.pinyin}</span>
+              </div>
+              <div className="chinese-stroke-practice__meaning">{currentStroke.meaning}</div>
+              <p className="chinese-stroke-practice__instruction">{currentStroke.instruction}</p>
             </div>
-            <div className="chinese-stroke-practice__meaning">{currentStroke.meaning}</div>
-            <p className="chinese-stroke-practice__instruction">{currentStroke.instruction}</p>
-          </div>
+          </>
         )}
 
         {/* Grade display above canvas - always reserves space */}
@@ -178,6 +185,13 @@ export default function ChineseStrokePractice({ __sandtrout_register_store }) {
         </div>
 
         <div className="chinese-stroke-practice__canvas-container">
+          {currentStroke?.enemy && (
+            <img
+              src={getEnemySvgPath(currentStroke.enemy.file, store.show_guides)}
+              alt={currentStroke.enemy.name}
+              className={`chinese-stroke-practice__enemy ${grade?.passed ? 'chinese-stroke-practice__enemy--defeated' : ''}`}
+            />
+          )}
           <canvas
             ref={canvasRef}
             width={300}
@@ -223,6 +237,12 @@ export default function ChineseStrokePractice({ __sandtrout_register_store }) {
         <div className="chinese-stroke-practice__stats">
           Passed: {store.completed_count} / {strokes.length}
         </div>
+        <button
+          className={`chinese-stroke-practice__guides-toggle ${store.show_guides ? 'chinese-stroke-practice__guides-toggle--active' : ''}`}
+          onClick={store.toggleGuides}
+        >
+          {store.show_guides ? 'Guides: ON' : 'Guides: OFF'}
+        </button>
       </footer>
     </div>
   );

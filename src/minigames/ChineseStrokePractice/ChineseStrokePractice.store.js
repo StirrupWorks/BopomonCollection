@@ -62,16 +62,28 @@ const STROKE_DEFINITIONS = {
   }
 };
 
+// Enemy mappings for each stroke
+const ENEMY_MAPPING = {
+  heng: { name: 'Shield Knight', file: 'shield-knight' },
+  shu: { name: 'Split Slime', file: 'split-slime' },
+  pie: { name: 'Purple Hydra', file: 'purple-hydra' },
+  na: { name: 'Green Hydra', file: 'hydra' },
+  dian: { name: 'Bubble Eye', file: 'bubble-eye' },
+  ti: { name: 'Lamp Djinn', file: 'lamp-djinn' },
+  zhe: { name: 'Shield Crab', file: 'pincer-crab' },
+  gou: { name: 'Pearl Clam', file: 'pearl-clam' },
+};
+
 // The 8 basic Chinese strokes
 const BASIC_STROKES = [
-  { id: 'heng', name: '横', pinyin: 'héng', meaning: 'Horizontal', instruction: 'Draw left to right, keep it level' },
-  { id: 'shu', name: '竖', pinyin: 'shù', meaning: 'Vertical', instruction: 'Draw straight down' },
-  { id: 'pie', name: '撇', pinyin: 'piě', meaning: 'Left-falling', instruction: 'Draw diagonally down-left (~45°)' },
-  { id: 'na', name: '捺', pinyin: 'nà', meaning: 'Right-falling', instruction: 'Draw diagonally down-right (~45°)' },
-  { id: 'dian', name: '点', pinyin: 'diǎn', meaning: 'Dot', instruction: 'Quick short downward tap' },
-  { id: 'ti', name: '提', pinyin: 'tí', meaning: 'Rising', instruction: 'Draw diagonally up-right' },
-  { id: 'zhe', name: '折', pinyin: 'zhé', meaning: 'Turning', instruction: 'Draw right, then turn sharply down (90°)' },
-  { id: 'gou', name: '钩', pinyin: 'gōu', meaning: 'Hook', instruction: 'Draw down, then hook up at the end' },
+  { id: 'heng', name: '横', pinyin: 'héng', meaning: 'Horizontal', instruction: 'Draw left to right, keep it level', enemy: ENEMY_MAPPING.heng },
+  { id: 'shu', name: '竖', pinyin: 'shù', meaning: 'Vertical', instruction: 'Draw straight down', enemy: ENEMY_MAPPING.shu },
+  { id: 'pie', name: '撇', pinyin: 'piě', meaning: 'Left-falling', instruction: 'Draw diagonally down-left (~45°)', enemy: ENEMY_MAPPING.pie },
+  { id: 'na', name: '捺', pinyin: 'nà', meaning: 'Right-falling', instruction: 'Draw diagonally down-right (~45°)', enemy: ENEMY_MAPPING.na },
+  { id: 'dian', name: '点', pinyin: 'diǎn', meaning: 'Dot', instruction: 'Quick short downward tap', enemy: ENEMY_MAPPING.dian },
+  { id: 'ti', name: '提', pinyin: 'tí', meaning: 'Rising', instruction: 'Draw diagonally up-right', enemy: ENEMY_MAPPING.ti },
+  { id: 'zhe', name: '折', pinyin: 'zhé', meaning: 'Turning', instruction: 'Draw right, then turn sharply down (90°)', enemy: ENEMY_MAPPING.zhe },
+  { id: 'gou', name: '钩', pinyin: 'gōu', meaning: 'Hook', instruction: 'Draw down, then hook up at the end', enemy: ENEMY_MAPPING.gou },
 ];
 
 // Resample stroke to fixed number of evenly-spaced points along path
@@ -317,14 +329,14 @@ const gradeStroke = (userPoints, strokeId) => {
 
   let feedback = 'Excellent!';
   if (finalScore < 90) feedback = 'Good job!';
-  if (finalScore < 75) feedback = 'Getting there';
+  if (finalScore < 80) feedback = 'Almost there';
   if (finalScore < 60) feedback = 'Keep practicing';
   if (finalScore < 40) feedback = 'Try again';
   if (issues.length > 0) feedback = issues[0];
 
   return {
     score: finalScore,
-    passed: finalScore >= 60,
+    passed: finalScore >= 80,
     feedback,
     issues
   };
@@ -368,6 +380,7 @@ export const createComponentStore = () => create(
     reference_path: null,    // Ideal stroke overlay
     completed_count: 0,
     practice_start_time: null,
+    show_guides: false,      // Show stroke guide lines on enemies (easy mode)
 
     // Getters
     getStrokes: () => BASIC_STROKES,
@@ -498,6 +511,10 @@ export const createComponentStore = () => create(
           reference_path: null
         });
       }
+    },
+
+    toggleGuides: () => {
+      set((state) => ({ show_guides: !state.show_guides }));
     },
 
     updatePracticeResult: () => {

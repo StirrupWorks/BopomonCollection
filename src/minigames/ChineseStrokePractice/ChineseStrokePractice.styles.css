@@ -98,6 +98,26 @@
   margin: 0;
 }
 
+/* Enemy display - centered in canvas */
+.chinese-stroke-practice__enemy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.chinese-stroke-practice__enemy--defeated {
+  opacity: 0.3;
+  filter: grayscale(0.8);
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
 /* Grade display above canvas - fixed height box */
 .chinese-stroke-practice__grade {
   display: flex;
@@ -176,13 +196,15 @@
 }
 
 .chinese-stroke-practice__canvas {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   border: 2px solid #ddd;
   border-radius: 0.75rem;
   cursor: crosshair;
   touch-action: none;
-  background: #fff;
+  background: transparent;
 }
 
 .chinese-stroke-practice__canvas-hint {
@@ -238,7 +260,9 @@
 
 /* Footer */
 .chinese-stroke-practice__footer {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-top: 1rem;
   border-top: 1px solid #eee;
   margin-top: 1rem;
@@ -247,6 +271,29 @@
 .chinese-stroke-practice__stats {
   font-size: 0.9rem;
   color: #888;
+}
+
+.chinese-stroke-practice__guides-toggle {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  background: #f5f5f5;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chinese-stroke-practice__guides-toggle:hover {
+  background: #eee;
+  border-color: #ccc;
+}
+
+.chinese-stroke-practice__guides-toggle--active {
+  background: #e3f2fd;
+  border-color: #90caf9;
+  color: #1565c0;
 }
 
 /* iPad and tablet optimizations */
@@ -289,6 +336,11 @@
   .chinese-stroke-practice__grade {
     height: 52px;
     max-width: 400px;
+  }
+
+  .chinese-stroke-practice__guides-toggle {
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -382,5 +434,22 @@
   .chinese-stroke-practice__stats,
   .chinese-stroke-practice__progress {
     color: #888;
+  }
+
+  .chinese-stroke-practice__guides-toggle {
+    background: #333;
+    border-color: #555;
+    color: #aaa;
+  }
+
+  .chinese-stroke-practice__guides-toggle:hover {
+    background: #444;
+    border-color: #666;
+  }
+
+  .chinese-stroke-practice__guides-toggle--active {
+    background: #1a3a4a;
+    border-color: #2a5a7a;
+    color: #64b5f6;
   }
 }

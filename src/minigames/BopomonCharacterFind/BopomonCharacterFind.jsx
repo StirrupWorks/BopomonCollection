@@ -104,8 +104,9 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
   // Create target from bubbles currently on the field
   const createTargetFromField = useCallback((existingTargets, bubbles) => {
     const excludeChars = existingTargets.map(t => t.character);
+    // Include spawning bubbles so new targets can be selected from freshly spawned bubbles
     const availableBubbles = bubbles.filter(
-      b => b.state === 'normal' && !excludeChars.includes(b.character)
+      b => (b.state === 'normal' || b.state === 'spawning') && !excludeChars.includes(b.character)
     );
 
     if (availableBubbles.length === 0) {
@@ -151,7 +152,8 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     const ct = targetsRef.current;
     const cb = bubblesRef.current;
     ct.forEach(target => {
-      const has = cb.some(b => b.character === target.character && b.state === 'normal');
+      // Include spawning bubbles so we don't override when target is on a freshly spawned bubble
+      const has = cb.some(b => b.character === target.character && (b.state === 'normal' || b.state === 'spawning'));
       if (!has) {
         const idx = cb.findIndex(
           b => b.state === 'normal' && !ct.some(t => t.character === b.character)
@@ -195,6 +197,13 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
       // Shaking → back to normal
       if (bubble.state === 'shaking') {
         if (timestamp - bubble.animStartTime > 500) {
+          return { ...bubble, state: 'normal' };
+        }
+        return bubble;
+      }
+      // Spawning → normal
+      if (bubble.state === 'spawning') {
+        if (timestamp - bubble.animStartTime > 300) {
           return { ...bubble, state: 'normal' };
         }
         return bubble;
@@ -277,14 +286,42 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
         setCorrectCount(0);
       }
 
-      // Replace matched target (always keep TARGET_COUNT) - pick from remaining bubbles
+      // Find the bubble closest to expiring (highest progress), excluding the matched one
+      let oldestIdx = -1;
+      let highestProgress = -1;
+      bubblesRef.current.forEach((b, i) => {
+        if (i !== idx && b.state === 'normal' && b.progress > highestProgress) {
+          highestProgress = b.progress;
+          oldestIdx = i;
+        }
+      });
+
+      // Immediately spawn two new bubbles from word bank (with spawn animation)
+      const currentChars = bubblesRef.current
+        .filter((b, i) => i !== idx && (oldestIdx < 0 || i !== oldestIdx) && b.state === 'normal')
+        .map(b => b.character);
+
+      const newBubble1 = createBubbleForSlot(bubble.slotIndex, now, [], currentChars);
+      newBubble1.state = 'spawning';
+      newBubble1.animStartTime = now;
+      currentChars.push(newBubble1.character);
+      bubblesRef.current[idx] = newBubble1;
+
+      if (oldestIdx >= 0) {
+        const oldSlotIndex = bubblesRef.current[oldestIdx].slotIndex;
+        const newBubble2 = createBubbleForSlot(oldSlotIndex, now, [], currentChars);
+        newBubble2.state = 'spawning';
+        newBubble2.animStartTime = now;
+        bubblesRef.current[oldestIdx] = newBubble2;
+      }
+
+      // Pick new target from the refreshed field
       const newTargets = targetsRef.current.map(t =>
         t.id === matchingTarget.id ? createTargetFromField(targetsRef.current, bubblesRef.current) : t
       );
       targetsRef.current = newTargets;
       setTargets([...newTargets]);
-
-      bubblesRef.current[idx] = { ...bubble, state: 'popping', animStartTime: now };
+      setBubbles([...bubblesRef.current]);
 
     } else {
       // --- Wrong → lose a life ---
@@ -296,7 +333,7 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
     }
 
     setTimeout(() => setFeedback(null), 800);
-  }, [loseLife, createTargetFromField, store]);
+  }, [loseLife, createTargetFromField, createBubbleForSlot, store]);
 
   // Start / restart
   const startGame = useCallback(() => {
@@ -553,7 +590,8 @@ export default function BopomonCharacterFind({ __sandtrout_register_store }) {
                   (isDanger ? ' bopomon-character-find__bubble--danger' : '') +
                   (bubble.state === 'popping' ? ' bopomon-character-find__bubble--pop' : '') +
                   (bubble.state === 'shaking' ? ' bopomon-character-find__bubble--shake' : '') +
-                  (bubble.state === 'expiring' ? ' bopomon-character-find__bubble--expire' : '')
+                  (bubble.state === 'expiring' ? ' bopomon-character-find__bubble--expire' : '') +
+                  (bubble.state === 'spawning' ? ' bopomon-character-find__bubble--spawn' : '')
                 }
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
                 onClick={() => handleBubbleClick(bubble.id)}
