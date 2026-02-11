@@ -109,17 +109,13 @@
   height: auto;
   object-fit: contain;
   pointer-events: none;
-  z-index: 1;
-  transition: all 0.3s ease;
+  z-index: 3;
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .chinese-stroke-practice__enemy--defeated {
   opacity: 0.3;
   filter: grayscale(0.8);
-  top: 20%;
-  left: 20%;
-  right: 20%;
-  bottom: 20%;
 }
 
 /* Grade display above canvas - fixed height box */
