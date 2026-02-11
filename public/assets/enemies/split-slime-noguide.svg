@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Split Slime - weak to vertical (竖) stroke down the center -->
+
+  <!-- Shadow -->
+  <ellipse cx="100" cy="175" rx="60" ry="12" fill="#1a1a1a" opacity="0.3"/>
+
+  <!-- Main slime body -->
+  <ellipse cx="100" cy="110" rx="75" ry="60" fill="#4a9c4a"/>
+
+  <!-- Armored sides - large golden plates -->
+  <!-- Left armor shell -->
+  <path d="M15 70 Q0 110 15 155 Q35 175 65 160 Q55 115 60 75 Q45 50 15 70" fill="#b8860b"/>
+  <path d="M20 75 Q8 110 20 150 Q38 168 60 155 Q52 115 56 80 Q44 58 20 75" fill="#daa520"/>
+  <path d="M25 80 Q15 110 25 145 Q40 160 55 150 Q48 115 52 85 Q42 65 25 80" fill="#ffd700"/>
+  <!-- Left armor ridges -->
+  <path d="M22 95 Q35 102 45 95" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <path d="M18 115 Q35 122 48 115" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <path d="M20 135 Q38 142 52 135" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <!-- Left armor gems -->
+  <circle cx="32" cy="105" r="5" fill="#8b0000"/>
+  <circle cx="32" cy="105" r="3" fill="#ff4444"/>
+  <circle cx="35" cy="125" r="4" fill="#8b0000"/>
+  <circle cx="35" cy="125" r="2" fill="#ff4444"/>
+
+  <!-- Right armor shell -->
+  <path d="M185 70 Q200 110 185 155 Q165 175 135 160 Q145 115 140 75 Q155 50 185 70" fill="#b8860b"/>
+  <path d="M180 75 Q192 110 180 150 Q162 168 140 155 Q148 115 144 80 Q156 58 180 75" fill="#daa520"/>
+  <path d="M175 80 Q185 110 175 145 Q160 160 145 150 Q152 115 148 85 Q158 65 175 80" fill="#ffd700"/>
+  <!-- Right armor ridges -->
+  <path d="M178 95 Q165 102 155 95" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <path d="M182 115 Q165 122 152 115" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <path d="M180 135 Q162 142 148 135" stroke="#b8860b" stroke-width="3" fill="none"/>
+  <!-- Right armor gems -->
+  <circle cx="168" cy="105" r="5" fill="#8b0000"/>
+  <circle cx="168" cy="105" r="3" fill="#ff4444"/>
+  <circle cx="165" cy="125" r="4" fill="#8b0000"/>
+  <circle cx="165" cy="125" r="2" fill="#ff4444"/>
+
+  <!-- Soft vulnerable center - THE WEAK POINT -->
+  <ellipse cx="100" cy="110" rx="28" ry="55" fill="#7fcf7f" opacity="0.9"/>
+
+  <!-- Face -->
+  <!-- Eyes -->
+  <ellipse cx="75" cy="95" rx="12" ry="15" fill="#1a3a1a"/>
+  <ellipse cx="125" cy="95" rx="12" ry="15" fill="#1a3a1a"/>
+  <ellipse cx="78" cy="92" rx="5" ry="6" fill="#ffffff"/>
+  <ellipse cx="128" cy="92" rx="5" ry="6" fill="#ffffff"/>
+
+  <!-- Mouth -->
+  <path d="M80 130 Q100 145 120 130" stroke="#1a3a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Slime drips -->
+  <ellipse cx="45" cy="160" rx="8" ry="12" fill="#4a9c4a" opacity="0.7"/>
+  <ellipse cx="155" cy="158" rx="6" ry="10" fill="#4a9c4a" opacity="0.7"/>
+
+  <!-- Highlight -->
+  <ellipse cx="70" cy="70" rx="15" ry="10" fill="#ffffff" opacity="0.3"/>
+</svg>

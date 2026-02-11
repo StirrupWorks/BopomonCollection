@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Lamp Djinn v2 - weak to rising (提) stroke from bottom-left to top-right -->
+
+  <!-- Magical glow background -->
+  <ellipse cx="115" cy="65" rx="45" ry="40" fill="#44ddaa" opacity="0.1"/>
+
+  <!-- Smoke body (flowing from lamp, becomes the djinn) -->
+  <path d="M50 155 Q45 130 55 105 Q65 80 90 60 Q110 45 130 50 Q150 55 155 75 Q158 95 145 105 Q130 115 125 105 Q135 95 130 85 Q120 75 105 80 Q90 88 95 100 Q100 110 90 115 Q75 118 70 105 Q68 90 80 75 Q95 58 115 55"
+        fill="#22aa88" opacity="0.5"/>
+  <path d="M52 152 Q48 125 58 100 Q70 75 95 58 Q115 48 132 55 Q148 62 150 80 Q152 95 140 102"
+        fill="#33cc99" opacity="0.6"/>
+  <path d="M55 148 Q52 120 65 95 Q80 70 105 58 Q125 52 138 62 Q148 72 145 88"
+        fill="#44ddaa" opacity="0.7"/>
+
+  <!-- Djinn upper body/head (emerges from smoke) -->
+  <ellipse cx="130" cy="45" rx="35" ry="30" fill="#33cc99"/>
+  <ellipse cx="130" cy="42" rx="30" ry="25" fill="#44ddaa"/>
+
+  <!-- Turban -->
+  <ellipse cx="130" cy="22" rx="25" ry="12" fill="#ffffff"/>
+  <ellipse cx="130" cy="20" rx="22" ry="10" fill="#f0f0f0"/>
+  <!-- Turban gem -->
+  <circle cx="130" cy="25" r="5" fill="#ff4466"/>
+  <circle cx="128" cy="23" r="2" fill="#ff8899"/>
+
+  <!-- Face -->
+  <!-- Eyes (large, friendly but mischievous) -->
+  <ellipse cx="118" cy="42" rx="9" ry="11" fill="#ffffff"/>
+  <ellipse cx="142" cy="42" rx="9" ry="11" fill="#ffffff"/>
+  <circle cx="120" cy="44" r="5" fill="#1a1a3a"/>
+  <circle cx="144" cy="44" r="5" fill="#1a1a3a"/>
+  <circle cx="118" cy="42" r="2" fill="#ffffff"/>
+  <circle cx="142" cy="42" r="2" fill="#ffffff"/>
+
+  <!-- Eyebrows (raised, expressive) -->
+  <path d="M108 32 Q118 28 128 32" stroke="#229977" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M132 32 Q142 28 152 32" stroke="#229977" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Nose -->
+  <ellipse cx="130" cy="50" rx="3" ry="4" fill="#2eb88a"/>
+
+  <!-- Big smile -->
+  <path d="M115 58 Q130 72 145 58" stroke="#1a6655" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Teeth hint -->
+  <path d="M120 60 L140 60" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Ears (pointed) -->
+  <path d="M95 40 L88 30 L98 42" fill="#44ddaa"/>
+  <path d="M165 40 L172 30 L162 42" fill="#44ddaa"/>
+
+  <!-- Small arms reaching out -->
+  <path d="M100 55 Q85 50 75 40" stroke="#33cc99" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M160 55 Q175 50 180 35" stroke="#33cc99" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Hands -->
+  <circle cx="73" cy="38" r="6" fill="#44ddaa"/>
+  <circle cx="182" cy="33" r="6" fill="#44ddaa"/>
+
+  <!-- Magic lamp (bottom-left) -->
+  <g transform="translate(20, 148)">
+    <!-- Lamp glow -->
+    <ellipse cx="28" cy="15" rx="20" ry="15" fill="#44ddaa" opacity="0.3"/>
+    <!-- Lamp base -->
+    <ellipse cx="28" cy="32" rx="18" ry="5" fill="#b8860b"/>
+    <!-- Lamp body -->
+    <ellipse cx="28" cy="22" rx="22" ry="12" fill="#daa520"/>
+    <ellipse cx="28" cy="20" rx="18" ry="9" fill="#ffd700"/>
+    <!-- Lamp spout -->
+    <path d="M48 18 L62 12 L62 18 L48 22 Z" fill="#daa520"/>
+    <!-- Lamp handle -->
+    <ellipse cx="8" cy="18" rx="6" ry="8" fill="none" stroke="#b8860b" stroke-width="4"/>
+    <!-- Lamp lid -->
+    <ellipse cx="28" cy="12" rx="10" ry="4" fill="#b8860b"/>
+    <!-- Lamp shine -->
+    <ellipse cx="20" cy="18" rx="5" ry="3" fill="#ffee88" opacity="0.7"/>
+  </g>
+
+  <!-- Magic sparkles -->
+  <circle cx="75" cy="70" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="55" cy="95" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="150" cy="70" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="170" cy="45" r="2" fill="#ffffff" opacity="0.5"/>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Bubble Eye - weak to dot (点) stroke: quick downward tap to pop -->
+
+  <!-- Floating shadow (faint, it's floating) -->
+  <ellipse cx="100" cy="180" rx="25" ry="6" fill="#1a1a1a" opacity="0.15"/>
+
+  <!-- Outer bubble glow -->
+  <circle cx="100" cy="95" r="65" fill="#aaddff" opacity="0.15"/>
+  <circle cx="100" cy="95" r="55" fill="#88ccff" opacity="0.1"/>
+
+  <!-- Main bubble -->
+  <circle cx="100" cy="95" r="50" fill="#cceeff" opacity="0.4"/>
+  <circle cx="100" cy="95" r="50" fill="none" stroke="#88bbdd" stroke-width="3" opacity="0.6"/>
+
+  <!-- Bubble inner layer -->
+  <circle cx="100" cy="95" r="42" fill="#ddeeff" opacity="0.3"/>
+
+  <!-- Bubble shine/reflection -->
+  <ellipse cx="75" cy="70" rx="18" ry="12" fill="#ffffff" opacity="0.7"/>
+  <ellipse cx="80" cy="75" rx="10" ry="6" fill="#ffffff" opacity="0.9"/>
+  <circle cx="130" cy="115" r="8" fill="#ffffff" opacity="0.4"/>
+
+  <!-- The Eye (center of bubble - the weak point) -->
+  <!-- Eyeball -->
+  <circle cx="100" cy="95" r="28" fill="#ffffee"/>
+  <circle cx="100" cy="95" r="25" fill="#fffff8"/>
+
+  <!-- Iris -->
+  <circle cx="100" cy="95" r="16" fill="#cc4444"/>
+  <circle cx="100" cy="95" r="14" fill="#dd5555"/>
+
+  <!-- Pupil (looking up nervously) -->
+  <circle cx="100" cy="90" r="8" fill="#1a1a1a"/>
+  <circle cx="97" cy="87" r="3" fill="#ffffff"/>
+
+  <!-- Blood vessels -->
+  <path d="M75 90 Q82 92 88 95" stroke="#ffaaaa" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M76 100 Q83 98 88 96" stroke="#ffaaaa" stroke-width="1" fill="none" opacity="0.5"/>
+  <path d="M125 88 Q118 91 112 94" stroke="#ffaaaa" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M124 102 Q117 99 112 96" stroke="#ffaaaa" stroke-width="1" fill="none" opacity="0.5"/>
+
+  <!-- Eyelid (half closed, worried) -->
+  <path d="M72 85 Q100 75 128 85" fill="#ddbbaa" opacity="0.9"/>
+  <path d="M72 85 Q100 78 128 85" stroke="#ccaa99" stroke-width="2" fill="none"/>
+  <!-- Eyelashes -->
+  <path d="M78 82 L75 75" stroke="#aa8877" stroke-width="2" stroke-linecap="round"/>
+  <path d="M90 78 L88 70" stroke="#aa8877" stroke-width="2" stroke-linecap="round"/>
+  <path d="M100 76 L100 68" stroke="#aa8877" stroke-width="2" stroke-linecap="round"/>
+  <path d="M110 78 L112 70" stroke="#aa8877" stroke-width="2" stroke-linecap="round"/>
+  <path d="M122 82 L125 75" stroke="#aa8877" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Small bubbles floating nearby -->
+  <circle cx="45" cy="60" r="8" fill="#cceeff" opacity="0.4"/>
+  <circle cx="45" cy="60" r="8" fill="none" stroke="#88bbdd" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="42" cy="57" rx="3" ry="2" fill="#ffffff" opacity="0.6"/>
+
+  <circle cx="160" cy="50" r="6" fill="#cceeff" opacity="0.4"/>
+  <circle cx="160" cy="50" r="6" fill="none" stroke="#88bbdd" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="158" cy="48" rx="2" ry="1.5" fill="#ffffff" opacity="0.6"/>
+
+  <circle cx="150" cy="140" r="10" fill="#cceeff" opacity="0.35"/>
+  <circle cx="150" cy="140" r="10" fill="none" stroke="#88bbdd" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="146" cy="136" rx="4" ry="2.5" fill="#ffffff" opacity="0.5"/>
+</svg>

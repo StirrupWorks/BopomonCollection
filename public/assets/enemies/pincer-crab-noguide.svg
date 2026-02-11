@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Shield Crab - weak to turn (折) stroke: horizontal then down through gap -->
+
+  <!-- Shadow -->
+  <ellipse cx="100" cy="185" rx="70" ry="12" fill="#1a1a1a" opacity="0.3"/>
+
+  <!-- Crab legs (back ones) -->
+  <path d="M60 140 Q45 150 35 165" stroke="#cc4444" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M55 150 Q40 160 28 170" stroke="#cc4444" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M140 140 Q155 150 165 165" stroke="#cc4444" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M145 150 Q160 160 172 170" stroke="#cc4444" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Oversized Pincer (LEFT side) -->
+  <!-- Upper claw -->
+  <path d="M15 70 Q5 60 10 45 Q20 30 40 35 Q55 40 60 55 Q62 65 55 75"
+        fill="#dd5555" stroke="#aa3333" stroke-width="2"/>
+  <path d="M20 65 Q15 55 20 45 Q30 38 42 42"
+        fill="#ee6666" stroke="none"/>
+  <!-- Lower claw -->
+  <path d="M15 85 Q5 95 10 110 Q20 125 40 120 Q55 115 60 100 Q62 90 55 80"
+        fill="#dd5555" stroke="#aa3333" stroke-width="2"/>
+  <path d="M20 90 Q15 100 20 110 Q30 117 42 113"
+        fill="#ee6666" stroke="none"/>
+  <!-- Pincer joint -->
+  <circle cx="58" cy="77" r="12" fill="#cc4444" stroke="#aa3333" stroke-width="2"/>
+  <circle cx="58" cy="77" r="8" fill="#dd5555"/>
+  <!-- Claw tips -->
+  <path d="M10 45 L3 38" stroke="#aa3333" stroke-width="4" stroke-linecap="round"/>
+  <path d="M10 110 L3 117" stroke="#aa3333" stroke-width="4" stroke-linecap="round"/>
+  <!-- Pincer serrations -->
+  <path d="M25 50 L22 45 M35 42 L34 36 M45 45 L46 40" stroke="#aa3333" stroke-width="2" stroke-linecap="round"/>
+  <path d="M25 105 L22 110 M35 113 L34 119 M45 110 L46 115" stroke="#aa3333" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Crab Body -->
+  <ellipse cx="100" cy="110" rx="45" ry="35" fill="#dd5555"/>
+  <ellipse cx="100" cy="108" rx="40" ry="30" fill="#ee6666"/>
+  <!-- Shell pattern -->
+  <ellipse cx="100" cy="100" rx="25" ry="18" fill="#dd5555" opacity="0.5"/>
+  <ellipse cx="100" cy="105" rx="15" ry="10" fill="#cc4444" opacity="0.4"/>
+
+  <!-- Eye stalks -->
+  <path d="M85 85 Q80 70 75 60" stroke="#dd5555" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M115 85 Q120 70 125 60" stroke="#dd5555" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <circle cx="75" cy="58" r="8" fill="#1a1a1a"/>
+  <circle cx="125" cy="58" r="8" fill="#1a1a1a"/>
+  <circle cx="73" cy="56" r="3" fill="#ffffff"/>
+  <circle cx="123" cy="56" r="3" fill="#ffffff"/>
+
+  <!-- Small arm holding shield -->
+  <path d="M140 95 Q150 90 155 85" stroke="#cc4444" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+  <!-- Oversized Shield (RIGHT side) -->
+  <!-- Shield main body -->
+  <path d="M150 40 L185 50 L190 100 L185 150 L150 160 Q140 100 150 40"
+        fill="#b8860b" stroke="#8b6914" stroke-width="3"/>
+  <!-- Shield face -->
+  <path d="M153 48 L180 56 L184 100 L180 144 L153 152 Q145 100 153 48"
+        fill="#daa520"/>
+  <!-- Shield inner design -->
+  <path d="M158 60 L172 66 L175 100 L172 134 L158 140 Q152 100 158 60"
+        fill="#b8860b" opacity="0.6"/>
+  <!-- Shield boss (center bump) -->
+  <circle cx="165" cy="100" r="15" fill="#ffd700" stroke="#b8860b" stroke-width="2"/>
+  <circle cx="165" cy="100" r="10" fill="#ffec8b"/>
+  <circle cx="162" cy="97" r="4" fill="#ffffff" opacity="0.6"/>
+  <!-- Shield edge rivets -->
+  <circle cx="155" cy="55" r="3" fill="#8b6914"/>
+  <circle cx="155" cy="85" r="3" fill="#8b6914"/>
+  <circle cx="155" cy="115" r="3" fill="#8b6914"/>
+  <circle cx="155" cy="145" r="3" fill="#8b6914"/>
+
+  <!-- Weak point on body (visible through gap) -->
+  <circle cx="100" cy="80" r="10" fill="#ff88ff" opacity="0.6"/>
+  <circle cx="100" cy="80" r="6" fill="#ffaaff"/>
+  <circle cx="97" cy="77" r="2" fill="#ffffff" opacity="0.8"/>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Hydra - weak to right-falling (捺) diagonal stroke cutting off all three heads -->
+
+  <!-- Shadow -->
+  <ellipse cx="80" cy="185" rx="50" ry="10" fill="#1a1a1a" opacity="0.3"/>
+
+  <!-- Tail -->
+  <path d="M30 160 Q10 155 5 145 Q2 135 10 130" stroke="#2d4a2d" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M10 130 L5 125 M10 130 L12 122" stroke="#2d4a2d" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Back legs -->
+  <ellipse cx="45" cy="172" rx="12" ry="10" fill="#3a5a3a"/>
+  <ellipse cx="100" cy="175" rx="10" ry="8" fill="#3a5a3a"/>
+
+  <!-- Main body (armored, bottom-left) -->
+  <ellipse cx="70" cy="150" rx="55" ry="35" fill="#3a5a3a"/>
+  <!-- Body scales/armor -->
+  <ellipse cx="55" cy="140" rx="30" ry="22" fill="#2d4a2d"/>
+  <path d="M80 135 Q65 130 50 135" stroke="#1a3a1a" stroke-width="2" fill="none"/>
+  <path d="M75 145 Q60 140 42 145" stroke="#1a3a1a" stroke-width="2" fill="none"/>
+  <path d="M70 155 Q55 150 35 155" stroke="#1a3a1a" stroke-width="2" fill="none"/>
+  <!-- Spines on back -->
+  <polygon points="60,118 55,130 65,130" fill="#1a3a1a"/>
+  <polygon points="42,122 38,133 46,132" fill="#1a3a1a"/>
+  <polygon points="28,130 26,140 32,139" fill="#1a3a1a"/>
+
+  <!-- Neck base -->
+  <ellipse cx="115" cy="140" rx="25" ry="20" fill="#4a6a4a"/>
+
+  <!-- NECK 1 (rightmost) - vulnerable -->
+  <path d="M130 135 Q150 110 165 85 Q175 60 170 45" stroke="#4a7a4a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M130 135 Q150 110 165 85 Q175 60 170 45" stroke="#5a8a5a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Head 1 -->
+  <ellipse cx="172" cy="40" rx="15" ry="12" fill="#4a7a4a"/>
+  <ellipse cx="172" cy="38" rx="12" ry="9" fill="#5a8a5a"/>
+  <!-- Eyes -->
+  <circle cx="178" cy="35" r="4" fill="#ffff00"/>
+  <circle cx="178" cy="35" r="2" fill="#1a1a1a"/>
+  <circle cx="166" cy="35" r="4" fill="#ffff00"/>
+  <circle cx="166" cy="35" r="2" fill="#1a1a1a"/>
+  <!-- Mouth -->
+  <path d="M182 45 Q172 50 162 45" stroke="#2a4a2a" stroke-width="2" fill="none"/>
+  <polygon points="180,46 177,52 183,52" fill="#ff6666"/>
+  <polygon points="164,46 161,52 167,52" fill="#ff6666"/>
+
+  <!-- NECK 2 (middle) - vulnerable -->
+  <path d="M115 130 Q125 95 135 65 Q142 40 138 25" stroke="#4a7a4a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M115 130 Q125 95 135 65 Q142 40 138 25" stroke="#5a8a5a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Head 2 -->
+  <ellipse cx="138" cy="20" rx="16" ry="13" fill="#4a7a4a"/>
+  <ellipse cx="138" cy="18" rx="13" ry="10" fill="#5a8a5a"/>
+  <!-- Eyes -->
+  <circle cx="145" cy="15" r="4" fill="#ffff00"/>
+  <circle cx="145" cy="15" r="2" fill="#1a1a1a"/>
+  <circle cx="131" cy="15" r="4" fill="#ffff00"/>
+  <circle cx="131" cy="15" r="2" fill="#1a1a1a"/>
+  <!-- Mouth -->
+  <path d="M148 26 Q138 32 128 26" stroke="#2a4a2a" stroke-width="2" fill="none"/>
+  <polygon points="146,27 143,34 149,34" fill="#ff6666"/>
+  <polygon points="130,27 127,34 133,34" fill="#ff6666"/>
+
+  <!-- NECK 3 (leftmost) - vulnerable -->
+  <path d="M105 125 Q100 90 105 60 Q108 35 102 20" stroke="#4a7a4a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M105 125 Q100 90 105 60 Q108 35 102 20" stroke="#5a8a5a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Head 3 -->
+  <ellipse cx="100" cy="15" rx="15" ry="12" fill="#4a7a4a"/>
+  <ellipse cx="100" cy="13" rx="12" ry="9" fill="#5a8a5a"/>
+  <!-- Eyes -->
+  <circle cx="106" cy="10" r="4" fill="#ffff00"/>
+  <circle cx="106" cy="10" r="2" fill="#1a1a1a"/>
+  <circle cx="94" cy="10" r="4" fill="#ffff00"/>
+  <circle cx="94" cy="10" r="2" fill="#1a1a1a"/>
+  <!-- Mouth -->
+  <path d="M110 21 Q100 27 90 21" stroke="#2a4a2a" stroke-width="2" fill="none"/>
+  <polygon points="108,22 105,29 111,29" fill="#ff6666"/>
+  <polygon points="92,22 89,29 95,29" fill="#ff6666"/>
+</svg>

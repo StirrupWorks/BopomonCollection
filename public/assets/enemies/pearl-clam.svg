@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Pearl Clam - weak to hook (钩) stroke: down into gap, hook to hit pearl -->
+
+  <!-- Shadow -->
+  <ellipse cx="100" cy="185" rx="60" ry="10" fill="#1a1a1a" opacity="0.3"/>
+
+  <!-- Bottom shell half -->
+  <path d="M20 110 Q20 180 100 180 Q180 180 180 110" fill="#6a5d50"/>
+  <path d="M25 110 Q25 175 100 175 Q175 175 175 110" fill="#7a6d60"/>
+  <path d="M30 110 Q30 170 100 170 Q170 170 170 110" fill="#8a7d70"/>
+  <!-- Shell ridges (bottom) -->
+  <path d="M35 130 Q100 145 165 130" stroke="#5a4d40" stroke-width="2" fill="none"/>
+  <path d="M30 150 Q100 165 170 150" stroke="#5a4d40" stroke-width="2" fill="none"/>
+  <path d="M35 168 Q100 178 165 168" stroke="#5a4d40" stroke-width="2" fill="none"/>
+
+  <!-- Inner flesh (visible through gap) -->
+  <ellipse cx="100" cy="115" rx="55" ry="25" fill="#e8b8c8"/>
+  <ellipse cx="100" cy="118" rx="45" ry="18" fill="#f0c8d8"/>
+
+  <!-- Pearl (the weak spot / gem) - glowing, offset left to match hook -->
+  <circle cx="75" cy="125" r="18" fill="#e8e8f0"/>
+  <circle cx="75" cy="125" r="15" fill="#f0f0ff"/>
+  <circle cx="75" cy="125" r="12" fill="#f8f8ff"/>
+  <!-- Pearl shine -->
+  <ellipse cx="69" cy="118" rx="5" ry="4" fill="#ffffff" opacity="0.9"/>
+  <circle cx="81" cy="128" r="3" fill="#ffffff" opacity="0.6"/>
+  <!-- Pearl glow -->
+  <circle cx="75" cy="125" r="22" fill="#aaccff" opacity="0.3"/>
+  <circle cx="75" cy="125" r="28" fill="#aaccff" opacity="0.15"/>
+
+  <!-- Top shell half (mostly closed, small gap) -->
+  <path d="M20 110 Q20 40 100 35 Q180 40 180 110" fill="#6a5d50"/>
+  <path d="M25 108 Q25 45 100 40 Q175 45 175 108" fill="#7a6d60"/>
+  <path d="M30 106 Q30 50 100 45 Q170 50 170 106" fill="#8a7d70"/>
+  <!-- Shell ridges (top) -->
+  <path d="M35 90 Q100 75 165 90" stroke="#5a4d40" stroke-width="2" fill="none"/>
+  <path d="M30 70 Q100 55 170 70" stroke="#5a4d40" stroke-width="2" fill="none"/>
+  <path d="M40 52 Q100 42 160 52" stroke="#5a4d40" stroke-width="2" fill="none"/>
+
+  <!-- Shell hinge -->
+  <ellipse cx="100" cy="35" rx="15" ry="8" fill="#5a4d40"/>
+
+  <!-- Gap/opening at top (where hook enters) -->
+  <ellipse cx="100" cy="105" rx="30" ry="8" fill="#2a1a1a"/>
+  <!-- Gap highlight -->
+  <ellipse cx="100" cy="103" rx="25" ry="5" fill="#3a2a2a"/>
+
+  <!-- Small eyes peeking from inside -->
+  <circle cx="75" cy="108" r="5" fill="#1a1a2a"/>
+  <circle cx="125" cy="108" r="5" fill="#1a1a2a"/>
+  <circle cx="74" cy="107" r="2" fill="#ffffff"/>
+  <circle cx="124" cy="107" r="2" fill="#ffffff"/>
+
+  <!-- Weak point indicator - hook stroke: down into gap, hook left to pearl -->
+  <path d="M100 20 L100 105 Q95 125 75 120" stroke="#66ffff" stroke-width="4" stroke-dasharray="8,4" fill="none" opacity="0.8" stroke-linecap="round"/>
+  <path d="M100 20 L100 105 Q95 125 75 120" stroke="#ffffff" stroke-width="2" stroke-dasharray="8,4" fill="none" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- Entry point indicator -->
+  <circle cx="100" cy="105" r="6" fill="#aaffff" opacity="0.5"/>
+
+  <!-- Bubbles around clam -->
+  <circle cx="45" cy="90" r="4" fill="#aaddff" opacity="0.4"/>
+  <circle cx="160" cy="75" r="3" fill="#aaddff" opacity="0.3"/>
+  <circle cx="35" cy="60" r="2" fill="#aaddff" opacity="0.3"/>
+  <circle cx="170" cy="95" r="3" fill="#aaddff" opacity="0.4"/>
+</svg>
