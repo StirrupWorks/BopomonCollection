@@ -1,7 +1,6 @@
 .chinese-stroke-practice {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   max-width: 500px;
   margin: 0 auto;
   padding: 1rem;
@@ -53,7 +52,6 @@
 }
 
 .chinese-stroke-practice__main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
